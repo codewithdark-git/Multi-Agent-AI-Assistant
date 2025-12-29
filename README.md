@@ -17,20 +17,20 @@ Previously: Basic mem0 + Anam avatar with single LLM
 
 ```
 ┌──────────────────────────────────────────────────────────┐
-│                    Streamlit Frontend                     │
-│                       (Text Chat)                         │
+│                    Streamlit Frontend                    │
+│                       (Text / voice)                     │
 └──────────────────┬───────────────────────────────────────┘
                    │
 ┌──────────────────▼───────────────────────────────────────┐
-│                 FastAPI Backend                           │
+│                 FastAPI Backend                          │
 │         /multi-agent/stream Endpoint                     │
 └──────────────────┬───────────────────────────────────────┘
                    │
 ┌──────────────────▼───────────────────────────────────────┐
 │           SUPERVISOR AGENT (LangGraph)                   │
-│   • Intent Classification                                 │
-│   • Domain Routing                                        │
-│   • Context Management                                    │
+│   • Intent Classification                                │
+│   • Domain Routing                                       │
+│   • Context Management                                   │
 └──────────────────┬───────────────────────────────────────┘
                    │
     ┌──────────────┼──────────────┬────────────┐
@@ -55,7 +55,7 @@ Previously: Basic mem0 + Anam avatar with single LLM
         │
     ┌───▼───────────────────────────────────┐
     │  External APIs & Knowledge Bases      │
-    │  • Google Search/Jobs/Flights/Recipes│
+    │  • Google Search/Jobs/Flights/Recipes │
     │  • Zep Knowledge Graph                │
     │  • Vector Database                    │
     │  • LLM Providers                      │
