@@ -1,21 +1,23 @@
-"""Anam AI service for avatar management."""
+"""Anam AI service for avatar management and video interactions."""
 import httpx
 from typing import List, Dict, Any, Optional
 from config.settings import settings
 
 
 class AnamService:
-    """Service for interacting with Anam AI API."""
+    """Service for interacting with Anam AI API for video avatar."""
 
     def __init__(self):
         """Initialize Anam AI service."""
         self.api_key = settings.anam_api_key
-        self.base_url = settings.anam_api_base_url
+        self.base_url = settings.anam_api_base_url or "https://api.anam.ai"
+        self.avatar_id = settings.anam_avatar_id
+        self.voice_id = settings.anam_voice_id
         self.headers = {
-            "Authorization": f"Bearer {self.api_key}",
+            "Authorization": f"Bearer {self.api_key}" if self.api_key else "",
             "Content-Type": "application/json",
         }
-        self.enabled = bool(self.api_key)
+        self.enabled = bool(self.api_key and settings.enable_video_avatar)
 
     async def create_session_token(
         self,
@@ -47,8 +49,8 @@ class AnamService:
             url = f"{self.base_url}/v1/auth/session-token"
 
             # Use defaults from settings if not provided
-            avatar_id = avatar_id or settings.anam_avatar_id
-            voice_id = voice_id or settings.anam_voice_id
+            avatar_id = avatar_id or self.avatar_id
+            voice_id = voice_id or self.voice_id
 
             if llm_id is None:
                 llm_id = "CUSTOMER_CLIENT_V1"  # This tells Anam to use client-side/custom LLM
